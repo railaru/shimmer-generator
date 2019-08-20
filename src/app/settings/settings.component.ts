@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnChanges {
 
   @Output() IncreaseWidthClicked = new EventEmitter<{passedWidth: number}>();
   @Output() DecreaseWidthClicked = new EventEmitter<{passedWidth: number}>();
@@ -21,24 +21,43 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges() {
+    this.sendCurrentWidth();
+  }
+
   handleIncreaseWidthClick() {
     this.currentWidth = this.currentWidth + this.increaseIncrement;
-    this.IncreaseWidthClicked.emit({passedWidth: this.currentWidth});
+    this.sendCurrentWidth();
   }
 
   handleDecreaseWidthClick() {
     this.currentWidth = this.currentWidth - this.increaseIncrement;
-    this.DecreaseWidthClicked.emit({passedWidth: this.currentWidth});
+    this.sendCurrentWidth();
+  }
+
+  handleWidthInputChange() {
+    this.sendCurrentWidth();
   }
 
   handleIncreaseHeightClick() {
     this.currentHeight = this.currentHeight + this.increaseIncrement;
-    this.IncreaseHeightClicked.emit({passedHeight: this.currentHeight});
+    this.sendCurrentHeight();
   }
 
   handleDecreaseHeightClick() {
     this.currentHeight = this.currentHeight - this.increaseIncrement;
-    this.DecreaseHeightClicked.emit({passedHeight: this.currentHeight});
+    this.sendCurrentHeight();
   }
 
+  handleHeightInputChange() {
+    this.sendCurrentHeight();
+  }
+
+  sendCurrentWidth() {
+    this.DecreaseWidthClicked.emit({passedWidth: this.currentWidth});
+  }
+
+  sendCurrentHeight() {
+    this.IncreaseHeightClicked.emit({passedHeight: this.currentHeight});
+  }
 }
