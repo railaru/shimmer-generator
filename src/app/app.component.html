@@ -3,10 +3,18 @@
 <div class="mx-auto px-6 mt-10">
   <div class="md:flex mb-4">
     <div class="md:w-1/4">
-      <app-settings></app-settings>
+      <app-settings
+        (IncreaseWidthClicked)="receiveWidth($event)"
+        (DecreaseWidthClicked)="receiveWidth($event)"
+        (IncreaseHeightClicked)="receiveHeight($event)"
+        (DecreaseHeightClicked)="receiveHeight($event)"
+      ></app-settings>
     </div>
     <div class="md:w-3/4">
-      <app-preview></app-preview>
+      <app-preview
+        [passedWidth]="receivedWidth"
+        [passedHeight]="receivedHeight"
+      ></app-preview>
       <app-code-output></app-code-output>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-preview',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreviewComponent implements OnInit {
 
+  @Input() passedWidth;
+  @Input() passedHeight;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.passedWidth);
   }
 
 }
